@@ -1,5 +1,5 @@
-# 🚀 TecnoStore UTC — Guía de instalación para Yahir
-## Proyecto: MartinezGonzalezYahirEmanuelUnidad1
+# 🚀 TecnoStore UTC — Guía de instalación para Proyecto Unidad 2
+## Proyecto: CortesVillarrealJoseAlfredoUnidad2
 
 ---
 
@@ -229,6 +229,9 @@ git push -u origin main
 
 ---
 
-*Desarrollado por: Martinez González Yahir Emanuel*
+*Desarrollado por: 
+Martinez González Yahir Emanuel,
+Brandon Alexis Sanjuan Enriquez,
+Jose Alfredo Cortes Villarreal.*
 *Materia: Desarrollo Web con Python*
 *Universidad Tecnológica de Coahuila (UTC)*
