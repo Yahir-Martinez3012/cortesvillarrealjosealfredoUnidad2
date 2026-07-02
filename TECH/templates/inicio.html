@@ -77,6 +77,65 @@
 </section>
 
 <!-- ===== CATEGORÍAS ===== -->
+<!-- ===== CARRUSEL ===== -->
+<section class="container my-5">
+    <div id="carouselTech" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
+
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselTech" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#carouselTech" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#carouselTech" data-bs-slide-to="2"></button>
+        </div>
+
+        <div class="carousel-inner rounded-4 shadow-lg">
+
+            <div class="carousel-item active">
+                <img src="https://imgs.search.brave.com/0xK1jJPzDpGgO3oC75TYHY4EqtbrH21K4NbiB0kYFKA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMjE1/NjU0ODM4NS9waG90/by9zYW4tcmFmYWVs/LWNhbGlmb3JuaWEt/bGVub3ZvLWxhcHRv/cHMtYXJlLWRpc3Bs/YXllZC1hdC1hLWJl/c3QtYnV5LXN0b3Jl/LW9uLWp1bmUtMDct/MjAyNC1pbi1zYW4u/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PUQzZWs4U2J1YkZY/cmNkN1lMMGVSTnV5/MjNmOEtDV3djZ00z/Tnh4SGVTcDA9" class="d-block w-100" height="500" style="object-fit: cover;">
+                <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); padding: 10px; border-radius: 10px;">
+                    <h2>Las Mejores Laptops</h2>
+                    <p>Potencia para estudiantes y profesionales.</p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img src="https://imgs.search.brave.com/1_tJbrCHU9UDl7sSWNYFEPWEtchCqx0EBwid8OrmJzc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90aWVu/ZGEubW92aXN0YXIu/Y29tLm14L21lZGlh/L3d5c2l3eWcvYWJp/bWFnZXMvY2VsdWxh/cmVzLXJlZG1pLndl/YnA" class="d-block w-100" height="500" style="object-fit: cover;">
+                <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); padding: 10px; border-radius: 10px;">
+                    <h2>Celulares de Última Generación</h2>
+                    <p>Grandes ofertas disponibles.</p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img src="https://imgs.search.brave.com/ZYaG3p7lpUZbA2rUAt8h_Yaj2_lH_JHzglLkDh-POzg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2l4c3RhdGlj/LmNvbS9tZWRpYS8y/ODIyMTdfZTM1N2Y1/ZDY2OWU2NDNiZjk5/YjZlOGMyODQyNWJj/MWR-bXYyLmpwZy92/MS9maWxsL3dfNjc2/LGhfODgyLGFsX2Ms/cV84NSxlbmNfYXZp/ZixxdWFsaXR5X2F1/dG8vMjgyMjE3X2Uz/NTdmNWQ2NjllNjQz/YmY5OWI2ZThjMjg0/MjViYzFkfm12Mi5q/cGc" class="d-block w-100" height="500" style="object-fit: cover;">
+                <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); padding: 10px; border-radius: 10px;">
+                    <h2>Accesorios Tecnológicos</h2>
+                    <p>Todo para complementar tu equipo.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselTech" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselTech" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
+
+    </div>
+</section>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselTech" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselTech" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+
+    </div>
+</section>
 <section class="section-categories py-5">
     <div class="container">
         <div class="section-header text-center mb-5">
@@ -219,5 +278,77 @@
         </div>
     </div>
 </section>
+<script>
+
+document.querySelectorAll('.btn').forEach(btn=>{
+
+    btn.addEventListener('mousemove',(e)=>{
+
+        const rect = btn.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        btn.style.transform =
+            `translate(
+                ${(x-rect.width/2)/12}px,
+                ${(y-rect.height/2)/12}px
+            ) scale(1.08)`;
+
+    });
+
+    btn.addEventListener('mouseleave',()=>{
+
+        btn.style.transform =
+            'translate(0px,0px) scale(1)';
+
+    });
+
+});
+
+</script>
+<script>
+
+function mostrarMensaje(){
+
+    console.log("Inicio");
+
+    console.log("Cargando productos");
+
+    console.log("Fin");
+
+}
+
+mostrarMensaje();
+
+</script>
+<script>
+
+async function cargarProductos(){
+
+    try{
+
+        const respuesta =
+            await fetch('/api/productos/');
+
+        const datos =
+            await respuesta.json();
+
+        console.log(datos);
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+cargarProductos();
+
+</script>
+
 
 {% endblock %}

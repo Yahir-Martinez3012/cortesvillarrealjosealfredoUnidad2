@@ -5,37 +5,172 @@
 ===================================================== */
 
 /* ---- Variables de color ---- */
-:root {
-    --verde: #00c853;
-    --verde-oscuro: #00a040;
-    --verde-claro: #69f0ae;
-    --azul: #1565c0;
-    --azul-medio: #1976d2;
-    --azul-claro: #42a5f5;
-    --azul-glow: #1e88e5;
-    --bg-dark: #0a0f1a;
-    --bg-card: #111827;
-    --bg-card2: #1a2235;
-    --bg-main: #0d1421;
-    --text-muted: #8899aa;
-    --border: rgba(255,255,255,0.08);
-    --glow-green: 0 0 20px rgba(0,200,83,0.3);
-    --glow-blue: 0 0 20px rgba(21,101,192,0.4);
+:root{
+    --primary:#ff0000;
+    --secondary:#1a1a1a;
+    --dark:#000000;
+    --gray:#2f2f2f;
+    --light:#d9d9d9;
+    /* Variable para el brillo azul claro solicitado */
+    --cyan-glow: #00f2fe;
+}
+
+body{
+    background:linear-gradient(
+        135deg,
+        #000000,
+        #1a1a1a,
+        #2f2f2f
+    );
+    color:white;
+}
+
+.section-title{
+    color:#ff0000;
+}
+
+.hero-section{
+    background:linear-gradient(
+        135deg,
+        #000000,
+        #1a1a1a,
+        #3d0000
+    );
 }
 
 /* ---- Reset y base ---- */
 * { box-sizing: border-box; }
 
-body {
-    background-color: var(--bg-dark);
-    color: #e0e6f0;
-    font-family: 'Inter', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+a { text-decoration: none; }
+
+/* ---- MODIFICACIÓN DE BOTONES (Efecto Acercamiento, Transición y Cambio de Mouse) ---- */
+.btn-hero,
+.btn-success{
+    position:relative;
+    overflow:hidden;
+    cursor: pointer; /* Fuerza el cambio visual del mouse a indicador de acción */
+    z-index: 1;
+    transition: all .4s cubic-bezier(0.25, 1, 0.5, 1); /* Transición más fluida y profesional */
 }
 
-a { text-decoration: none; }
+/* INTERACCIÓN 1: Botones con zoom y sombra expandida */
+.btn-hero:hover,
+.btn-success:hover{
+    color: var(--dark) !important; /* Cambio de color de texto para contraste profesional */
+    transform:
+        translateY(-6px)
+        scale(1.08); /* Efecto de acercamiento/zoom aumentado */
+    box-shadow:
+        0 0 25px var(--cyan-glow),
+        0 0 50px rgba(0, 242, 254, 0.6);
+}
+
+/* Efecto fluido de fondo (Relleno desde la izquierda al acercar el mouse) */
+.btn-hero::before,
+.btn-success::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    transition: all .4s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: -1;
+}
+
+.btn-hero:hover::before,
+.btn-success:hover::before {
+    left: 0;
+}
+
+/* INTERACCIÓN 2: Tarjetas de Producto con Elevación Exagerada y Brillo Azul Claro */
+.product-card{
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.product-card:hover{
+    transform: translateY(-15px) scale(1.04);
+    box-shadow: 0 20px 45px rgba(0, 242, 254, 0.45);
+    border-color: var(--cyan-glow) !important;
+}
+
+.product-card,
+.category-card,
+.feature-item{
+    opacity:0;
+    transform:translateY(50px);
+    animation:fadeUp 1s forwards;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(50px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ---- Ajuste de matices llamativas pero profesionales (Rojo, Negro y Gris de tus variables) ---- */
+body{
+    background:
+    linear-gradient(
+        -45deg,
+        var(--dark),
+        var(--secondary),
+        var(--gray),
+        var(--dark)
+    );
+    background-size:400% 400%;
+    animation:fondoAnimado 12s ease infinite;
+}
+
+@keyframes fondoAnimado{
+    0%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+    100%{ background-position:0% 50%; }
+}
+
+/* =====================================================
+   NUEVOS COMPONENTES: CARRUSEL CON TRANSICIÓN
+===================================================== */
+.carousel-container {
+    width: 100%;
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--dark), var(--secondary));
+    border: 1px solid var(--gray);
+    border-radius: 16px;
+    margin: 25px 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    /* Transición de desvanecimiento suave requerida */
+    transition: opacity 0.8s ease-in-out; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    text-align: center;
+    color: var(--light);
+    border-left: 5px solid var(--primary);
+}
+
+.carousel-slide.active {
+    opacity: 1;
+}
 
 /* =====================================================
    NAVBAR
@@ -51,6 +186,12 @@ a { text-decoration: none; }
 .navbar-brand {
     font-size: 1.3rem !important;
     letter-spacing: -0.3px;
+    transition: transform 0.3s ease;
+}
+
+/* INTERACCIÓN 3: Logotipo de la Barra de Navegación */
+.navbar-brand:hover {
+    transform: scale(1.05) rotate(-1deg);
 }
 
 .brand-accent { color: var(--verde) !important; }
@@ -61,12 +202,29 @@ a { text-decoration: none; }
     font-weight: 500;
     padding: 0.5rem 0.8rem !important;
     border-radius: 8px;
-    transition: all 0.2s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+/* INTERACCIÓN 4: Enlaces del Menú con Línea Deslizable */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 2px;
+    left: 50%;
+    background-color: var(--cyan-glow);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+.nav-link:hover::after {
+    width: 80%;
 }
 
 .nav-link:hover, .nav-link.active {
     color: #fff !important;
-    background: rgba(0, 200, 83, 0.12);
+    background: rgba(0, 242, 254, 0.12);
 }
 
 .nav-link.active { color: var(--verde) !important; }
@@ -78,14 +236,14 @@ a { text-decoration: none; }
     border-radius: 20px 0 0 20px;
     font-size: 0.85rem;
     width: 200px;
-    transition: width 0.3s;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .search-form .form-control:focus {
     background: rgba(255,255,255,0.1);
-    border-color: var(--verde);
-    box-shadow: none;
-    width: 240px;
+    border-color: var(--cyan-glow);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+    width: 250px;
     color: #fff;
 }
 
@@ -374,15 +532,21 @@ a { text-decoration: none; }
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 16px;
-    transition: all 0.3s;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     cursor: pointer;
 }
 
+/* INTERACCIÓN 5: Tarjetas de Categorías con Brillo Azul Claro */
 .category-card:hover {
-    border-color: rgba(0,200,83,0.4);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3), var(--glow-green);
+    border-color: var(--cyan-glow);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 242, 254, 0.35);
     background: var(--bg-card2);
+}
+
+.category-card:hover .cat-icon {
+    transform: scale(1.15);
+    color: var(--cyan-glow);
 }
 
 .cat-icon {
@@ -396,6 +560,7 @@ a { text-decoration: none; }
     font-size: 1.5rem;
     color: var(--verde);
     border: 1px solid rgba(0,200,83,0.2);
+    transition: all 0.3s ease;
 }
 
 .cat-name {
@@ -409,24 +574,6 @@ a { text-decoration: none; }
    TARJETAS DE PRODUCTO
 ===================================================== */
 .section-featured { background: var(--bg-dark); }
-
-.product-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    transition: all 0.3s;
-    position: relative;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.product-card:hover {
-    border-color: rgba(0,200,83,0.35);
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.4), var(--glow-green);
-}
 
 .product-badge-oferta {
     position: absolute;
@@ -455,10 +602,13 @@ a { text-decoration: none; }
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s;
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.product-card:hover .product-img { transform: scale(1.05); }
+/* INTERACCIÓN 6: Efecto Zoom Suave en Imágenes */
+.product-card:hover .product-img { 
+    transform: scale(1.1); 
+}
 
 .product-img-placeholder {
     display: flex;
@@ -551,6 +701,10 @@ a { text-decoration: none; }
     border-radius: 20px;
     padding: 2.5rem;
     box-shadow: var(--glow-blue);
+    transition: box-shadow 0.4s ease;
+}
+.cta-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 242, 254, 0.4);
 }
 
 /* =====================================================
@@ -563,12 +717,14 @@ a { text-decoration: none; }
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 16px;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 }
 
+/* INTERACCIÓN 7: Bloques de Características Destacadas */
 .feature-item:hover {
-    border-color: rgba(0,200,83,0.3);
-    transform: translateY(-3px);
+    border-color: var(--cyan-glow);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 242, 254, 0.2);
 }
 
 .feature-icon {
@@ -655,8 +811,9 @@ a { text-decoration: none; }
 }
 
 .filter-link:hover, .filter-link.active {
-    background: rgba(0,200,83,0.12);
-    color: var(--verde);
+    background: rgba(0, 242, 254, 0.15);
+    color: var(--cyan-glow);
+    padding-left: 18px; /* Desplazamiento lateral sutil */
 }
 
 /* =====================================================
@@ -746,6 +903,11 @@ a { text-decoration: none; }
     border-radius: 24px;
     padding: 2.5rem;
     box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    transition: border-color 0.4s ease;
+}
+
+.auth-card:hover {
+    border-color: rgba(0, 242, 254, 0.4);
 }
 
 .auth-header { text-align: center; margin-bottom: 2rem; }
@@ -1048,6 +1210,7 @@ a { text-decoration: none; }
     padding: 4px 0;
 }
 
+/* INTERACCIÓN 8: Botones del Chatbot */
 .suggestion-btn {
     background: rgba(0,200,83,0.08);
     border: 1px solid rgba(0,200,83,0.25);
@@ -1056,12 +1219,14 @@ a { text-decoration: none; }
     padding: 5px 12px;
     font-size: 0.78rem;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
 }
 
 .suggestion-btn:hover {
-    background: rgba(0,200,83,0.18);
-    transform: scale(1.03);
+    background: var(--cyan-glow);
+    color: #000;
+    border-color: var(--cyan-glow);
+    transform: scale(1.06) translateY(-2px);
 }
 
 .chat-input-area {
@@ -1107,6 +1272,12 @@ a { text-decoration: none; }
     border-radius: 12px !important;
     margin-bottom: 8px;
     overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* INTERACCIÓN 9: Acordeones con Iluminación */
+.accordion-custom .accordion-item:hover {
+    border-color: var(--cyan-glow) !important;
 }
 
 .accordion-custom .accordion-button {
@@ -1116,11 +1287,12 @@ a { text-decoration: none; }
     font-size: 0.95rem;
     border: none;
     box-shadow: none !important;
+    transition: all 0.3s ease;
 }
 
 .accordion-custom .accordion-button:not(.collapsed) {
-    color: var(--verde) !important;
-    background: rgba(0,200,83,0.06) !important;
+    color: var(--cyan-glow) !important;
+    background: rgba(0, 242, 254, 0.08) !important;
 }
 
 .accordion-custom .accordion-body {
@@ -1171,6 +1343,12 @@ a { text-decoration: none; }
     border-radius: 16px;
     overflow: hidden;
     height: 100%;
+    transition: all 0.4s ease;
+}
+/* Aplicación del Brillo Azul Claro al Mapa del Sitio */
+.sitemap-card:hover {
+    border-color: var(--cyan-glow);
+    box-shadow: 0 15px 35px rgba(0, 242, 254, 0.3);
 }
 
 .sitemap-card-header {
@@ -1198,12 +1376,13 @@ a { text-decoration: none; }
     border-radius: 10px;
     font-size: 0.88rem;
     font-weight: 500;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
 }
 
 .sitemap-list a:hover {
-    background: rgba(0,200,83,0.1);
-    color: var(--verde);
+    background: rgba(0, 242, 254, 0.12);
+    color: var(--cyan-glow);
+    padding-left: 20px;
 }
 
 /* =====================================================
@@ -1293,10 +1472,15 @@ a { text-decoration: none; }
 .social-links a {
     color: var(--text-muted);
     font-size: 1.2rem;
-    transition: color 0.2s;
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
-.social-links a:hover { color: var(--verde); }
+/* INTERACCIÓN 10: Iconos de Redes Sociales */
+.social-links a:hover {
+    color: var(--cyan-glow);
+    transform: translateY(-4px) scale(1.2);
+}
 
 /* =====================================================
    OFERTA HEADER
