@@ -230,8 +230,8 @@ git push -u origin main
 ---
 
 *Desarrollado por: 
-Martinez González Yahir Emanuel
-Brandon Alexis Sanjuan Enriquez
-Jose Alfredo Cortes Villarreal*
+Martinez González Yahir Emanuel,
+Brandon Alexis Sanjuan Enriquez,
+Jose Alfredo Cortes Villarreal.*
 *Materia: Desarrollo Web con Python*
 *Universidad Tecnológica de Coahuila (UTC)*
